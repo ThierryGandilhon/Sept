@@ -6,7 +6,7 @@ import java.util.List;
 public class Sept {
 	public static void main (String[] args) {
 
-		int theNumber = 3;
+		int theNumber = 7;
 
 		// Step 1
 		List<Expression> combinations1 = new LinkedList<Expression>();
@@ -47,7 +47,7 @@ public class Sept {
 		
 		int i = 0;
 		for ( Expression expression : expressions ) {
-			System.out.println(label + " (" + ++i + "):" + expression.toString());
+			System.out.println(label + " (" + ++i + "):" + expression.toString() + " = " + expression.eval());
 		}
 
 	}

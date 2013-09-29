@@ -59,5 +59,4 @@ public class TestEval {
 		Expression exp = new Operation(Operator.DIVIDE, new Operand(2), new Operand(2));
 		assertFalse(exp.eval().equals(2));
 	}
-
 }

@@ -10,28 +10,27 @@ public class Operand extends Expression {
 		this.value = value;
 	}
 
+
 	public boolean isOperand() {
 		return true;
 	}
+
 
 	@Override
 	public String toString() {
 		return value.toString();
 	}
 	
+
 	public Expression eval() {
 		return this;
 	}
 	
+
 	public boolean equals(Expression expression) {
 		return expression.isOperand() && ((Operand) expression).value == this.value;
 	}
 	
-	public List<Expression> combine(Operator operator, Expression expression) {
-		List<Expression> combinations = new LinkedList<Expression>();
-		combinations.add(new Operation(operator, this, expression));
-		return combinations;
-	}
 
 	public List<Expression> combine(Expression expression) {
 		List<Expression> combinations = new LinkedList<Expression>();

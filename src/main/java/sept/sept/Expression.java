@@ -15,7 +15,6 @@ public abstract class Expression {
 		return false;
 	}
 	
-	public abstract List<Expression> combine(Operator operator, Expression expression);
 	public abstract List<Expression> combine(Expression expression);
 
 }

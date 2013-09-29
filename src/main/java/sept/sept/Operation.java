@@ -49,27 +49,29 @@ public class Operation extends Expression {
 	
 	
 
+
 	public List<Expression> combine(Expression expression) {
 		return reduce(this.left.combine(expression), this.right.combine(expression));
-	}		
+	}      
 
-	public List<Expression> combine(Operator operator, Expression expression) {
-		return reduce(this.left.combine(operator, expression), this.right.combine(operator, expression));
-	}
 	
 	private List<Expression> reduce(List<Expression>  leftCombinations, List<Expression>  rightCombinations) {
 		List<Expression> combinations = new LinkedList<Expression>();
 
 		for ( Expression left:leftCombinations ) {
+			if ( this.operator == Operator.DIVIDE && this.right.eval().equals(0) )
+				continue;
+			
 			combinations.add(new Operation(this.operator, left, this.right));
 		}
 
 		for ( Expression right:rightCombinations ) {
+			if ( this.operator == Operator.DIVIDE && right.eval().equals(0) )
+				continue;
+			
 			combinations.add(new Operation(this.operator, this.left, right));
 		}
 
 		return combinations;
 	}
-
-
 }
