@@ -1,40 +1,24 @@
 package sept.sept;
 
 public enum Operator {
-	PLUS {
-		public String toString() {
-			return "+";
-		}
+	PLUS("+", true),
+	MINUS("-", false),
+	TIMES("*", true),
+	DIVIDE("/", false);
 
-		public boolean isCommutative() {
-			return true;
-		}
-	},
-	MINUS {
-		public String toString() {
-			return "-";
-		}
+	private final String  label;
+	private final boolean isCommutative;
 
-		public boolean isCommutative() {
-			return false;
-		}
-	},
-	TIMES {
-		public String toString() {
-			return "*";
-		}
+	Operator(String label, boolean isCommutative) {
+		this.label = label;
+		this.isCommutative = isCommutative;
+	}
 
-		public boolean isCommutative() {
-			return true;
-		}
-	},
-	DIVIDE {
-		public String toString() {
-			return "/";
-		}
+	public String toString() {
+		return label;
+	}
 
-		public boolean isCommutative() {
-			return false;
-		}
+	public boolean isCommutative() {
+		return isCommutative;
 	}
 }

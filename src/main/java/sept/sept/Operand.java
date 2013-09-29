@@ -34,6 +34,7 @@ public class Operand extends Expression {
 
 	public List<Expression> combine(Expression expression) {
 		List<Expression> combinations = new LinkedList<Expression>();
+		
 		combinations.add(new Operation(Operator.PLUS, this, expression));
 		combinations.add(new Operation(Operator.MINUS, this, expression));
 		combinations.add(new Operation(Operator.TIMES, this, expression));

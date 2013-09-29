@@ -9,16 +9,16 @@ public class Sept {
 		int theNumber = 7;
 
 		// Step 1
-		List<Expression> combinations1 = new LinkedList<Expression>();
-		combinations1.add(new Operand(theNumber));
-		showCombinations("Combinations of 1", combinations1);		
+		List<Expression> initialList = new LinkedList<Expression>();
+		initialList.add(new Operand(theNumber));
+		showCombinations("Combinations of 1", initialList);		
 		
 
-		List<Expression> currentList = combinations1;
+		List<Expression> currentList = initialList;
 
 		for (int i = 2 ; i <= theNumber ; i++) {
 			List<Expression> newList = new LinkedList<Expression>();
-			newList = createCombinations(combinations1, currentList);
+			newList = createCombinations(initialList, currentList);
 			showCombinations("Combinations of " + i , newList);		
 			currentList = newList;
 		}
@@ -45,10 +45,10 @@ public class Sept {
 	private static void showCombinations(String label, List<Expression> expressions) {
 		System.out.println(label + ": " + expressions.size()+ " found.");
 		
-		int i = 0;
-		for ( Expression expression : expressions ) {
-			System.out.println(label + " (" + ++i + "):" + expression.toString() + " = " + expression.eval());
-		}
+		// int i = 0;
+		// for ( Expression expression : expressions ) {
+		// 	System.out.println(label + " (" + ++i + "):" + expression.toString() + " = " + expression.eval());
+		// }
 
 	}
 }
