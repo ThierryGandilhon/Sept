@@ -1,4 +1,4 @@
-package sept.sept.test;
+package sept.sept;
 
 import static org.junit.Assert.*;
 

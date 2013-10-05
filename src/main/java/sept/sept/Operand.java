@@ -27,11 +27,27 @@ public class Operand extends Expression {
 	}
 	
 
-	public boolean equals(Expression expression) {
-		return expression.isOperand() && ((Operand) expression).value == this.value;
+	@Override
+	public boolean equals(Object object) {
+		if ( object == null) 			        return false;		
+		if ( object == this )                   return true;
+		if ( !(object instanceof Operand) )	return false;
+		
+		Operand operand = (Operand) object;
+		return (operand.value == this.value);
 	}
 
 
+	/*
+	 * Combine an operand (this) and an expression. To do so, generates
+	 * the for arithmetic operations combining the operand (this) and the 
+	 * expression passed as a parameter.
+	 * 
+	 * Note that we do not generate the divide operation if the expression
+	 * evals to zero.
+	 * 
+	 * @see sept.sept.Expression#combine(sept.sept.Expression)
+	 */
 	public List<Expression> combine(Expression expression) {
 		List<Expression> combinations = new LinkedList<Expression>();
 		
@@ -43,6 +59,5 @@ public class Operand extends Expression {
 		}
 		return combinations;
 	}
-
 }
  

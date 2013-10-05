@@ -47,13 +47,13 @@ public class Sept {
 		
 
 	
-	private static void showCombinations(String label, List<Expression> expressions) {
+	static void showCombinations(String label, List<Expression> expressions) {
 		System.out.println(label + ": " + expressions.size()+ " found.");
 		
-		// int i = 0;
-		// for ( Expression expression : expressions ) {
-		// 	System.out.println(label + " (" + ++i + "):" + expression.toString() + " = " + expression.eval());
-		// }
+		int i = 0;
+		for ( Expression expression : expressions ) {
+			System.out.println(label + " (" + ++i + "):" + expression.toString() + " = " + expression.eval());
+		}
 
 	}
 

@@ -14,6 +14,7 @@ public class Operation extends Expression {
 		this.right   = right;
 	}
 	
+	@Override
 	public String toString() {
 		return "(" + left.toString() + " " + operator.toString() + " " + right.toString() + ")";
 	}
@@ -40,22 +41,31 @@ public class Operation extends Expression {
 		}
 	}
 	
-	
-	public boolean equals(Expression expression) {
-		return     expression.isOperand() 
-				&& ((Operation) expression).left.equals(this.left) 
-				&& ((Operation) expression).right.equals(this.right);
+
+	@Override
+	public boolean equals(Object object) {
+		if ( object == null) 			        return false;		
+		if ( object == this )                   return true;
+		if ( !(object instanceof Operation) )	return false;
+		
+		Operation expression = (Operation) object;
+		return     expression.operator == this.operator 
+				&& expression.left.equals(this.left) 
+				&& expression.right.equals(this.right);
 	}
 	
 	
 
 
+	/*
+	 * Combine two expressions. To do so, we 
+	 * 
+	 * @see sept.sept.Expression#combine(sept.sept.Expression)
+	 */
 	public List<Expression> combine(Expression expression) {
-		List<Expression> leftCombinations = left.combine(expression);
-		List<Expression> rightCombinations = right.combine(expression);
-
 		List<Expression> allCombinations = new LinkedList<Expression>();
 
+		List<Expression> leftCombinations = left.combine(expression);
 		for ( Expression leftExpression:leftCombinations ) {
 			if ( operator == Operator.DIVIDE && right.eval().equals(0) )
 				continue;
@@ -63,14 +73,14 @@ public class Operation extends Expression {
 			allCombinations.add(new Operation(operator, leftExpression, right));
 		}
 
-		if ( !operator.isCommutative() ) {
-			for ( Expression rightExpression:rightCombinations ) {
-				if ( operator == Operator.DIVIDE && rightExpression.eval().equals(0) )
-					continue;
-				
-				allCombinations.add(new Operation(operator, left, rightExpression));
-			}
+		List<Expression> rightCombinations = right.combine(expression);
+		for ( Expression rightExpression:rightCombinations ) {
+			if ( operator == Operator.DIVIDE && rightExpression.eval().equals(0) )
+				continue;
+			
+			allCombinations.add(new Operation(operator, left, rightExpression));
 		}
+
 		return allCombinations;
 	}
 }

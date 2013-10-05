@@ -1,12 +1,11 @@
 package sept.sept;
 
-import java.util.LinkedList;
 import java.util.List;
 
 public abstract class Expression implements Comparable<Expression> {
 	public abstract String toString();
 	public abstract Expression eval();
-	public abstract boolean equals(Expression expression);
+	public abstract boolean equals(Object o);
 	
 	public boolean equals(Integer i) {
 		return this.equals(new Operand(i));
