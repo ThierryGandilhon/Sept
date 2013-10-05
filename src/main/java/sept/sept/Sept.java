@@ -3,15 +3,18 @@ package sept.sept;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.google.common.collect.TreeMultimap;
+import com.google.common.collect.Multimap;
+
 public class Sept {
 	public static void main (String[] args) {
 
 		int theNumber = 7;
 
-		// Step 1
+		// Step 1: generate all forms.
 		List<Expression> initialList = new LinkedList<Expression>();
 		initialList.add(new Operand(theNumber));
-		showCombinations("Combinations of 1", initialList);		
+		//showCombinations("Combinations of 1", initialList);		
 		
 
 		List<Expression> currentList = initialList;
@@ -19,9 +22,11 @@ public class Sept {
 		for (int i = 2 ; i <= theNumber ; i++) {
 			List<Expression> newList = new LinkedList<Expression>();
 			newList = createCombinations(initialList, currentList);
-			showCombinations("Combinations of " + i , newList);		
+			//showCombinations("Combinations of " + i , newList);		
 			currentList = newList;
 		}
+
+		countCombinations(currentList);
 	}
 	
 	
@@ -51,4 +56,27 @@ public class Sept {
 		// }
 
 	}
+
+
+	private static void countCombinations(List<Expression> expressions) {
+		TreeMultimap<Integer, Expression> countCombinations = TreeMultimap.create();
+		
+		for ( Expression expression : expressions ) {
+			try {
+				Expression value = expression.eval();
+				countCombinations.put(Integer.parseInt(value.toString()), expression);
+			}
+			catch ( ArithmeticException e ) {
+				// Nothing
+			}
+		}
+		
+		for ( Integer key : countCombinations.keySet() ) {
+			int count = countCombinations.get(key).size();
+			
+			System.out.println("Sum = " + key + " : " + count + " solutions.");
+		}
+	}
 }
+
+

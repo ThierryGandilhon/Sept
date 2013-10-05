@@ -30,7 +30,7 @@ public class Operand extends Expression {
 	public boolean equals(Expression expression) {
 		return expression.isOperand() && ((Operand) expression).value == this.value;
 	}
-	
+
 
 	public List<Expression> combine(Expression expression) {
 		List<Expression> combinations = new LinkedList<Expression>();
